@@ -1,19 +1,19 @@
 {
   "files": {
     "main.css": "/fap-frontend/static/css/main.8b944dbd.css",
-    "main.js": "/fap-frontend/static/js/main.bedf3563.js",
+    "main.js": "/fap-frontend/static/js/main.edc965fe.js",
     "static/js/60.2d2a8cc5.chunk.js": "/fap-frontend/static/js/60.2d2a8cc5.chunk.js",
     "static/js/453.e03b24a6.chunk.js": "/fap-frontend/static/js/453.e03b24a6.chunk.js",
     "static/js/795.548b4d94.chunk.js": "/fap-frontend/static/js/795.548b4d94.chunk.js",
     "index.html": "/fap-frontend/index.html",
     "main.8b944dbd.css.map": "/fap-frontend/static/css/main.8b944dbd.css.map",
-    "main.bedf3563.js.map": "/fap-frontend/static/js/main.bedf3563.js.map",
+    "main.edc965fe.js.map": "/fap-frontend/static/js/main.edc965fe.js.map",
     "60.2d2a8cc5.chunk.js.map": "/fap-frontend/static/js/60.2d2a8cc5.chunk.js.map",
     "453.e03b24a6.chunk.js.map": "/fap-frontend/static/js/453.e03b24a6.chunk.js.map",
     "795.548b4d94.chunk.js.map": "/fap-frontend/static/js/795.548b4d94.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.8b944dbd.css",
-    "static/js/main.bedf3563.js"
+    "static/js/main.edc965fe.js"
   ]
 }
