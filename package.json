@@ -22,8 +22,8 @@
     "build": "rm -rf build && react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "predeploy": "docker stop fap-frontend_react-app_1 && docker rm fap-frontend_react-app_1 && docker rmi fap-frontend_react-app",
+    "deploy": "docker-compose build react-app && docker-compose up -d react-app"
   },
   "eslintConfig": {
     "extends": [
