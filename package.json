@@ -2,7 +2,6 @@
   "name": "order-frontend",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://abhi8076.github.io/fap-frontend",
   "dependencies": {
     "@phosphor-icons/react": "^2.1.7",
     "@testing-library/jest-dom": "^5.17.0",

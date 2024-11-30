@@ -1,13 +1,5 @@
-FROM node:20-alpine
+FROM nginx:latest
+COPY build/ /usr/share/nginx/html
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
 
-WORKDIR /usr/src/app
-
-COPY package*.json ./
-
-RUN rm -rf node_modules package-lock.json && npm install
-
-COPY . .
-
-EXPOSE 3000
-
-CMD ["npm", "start"]
