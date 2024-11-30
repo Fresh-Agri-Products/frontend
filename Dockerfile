@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-
-=======
 FROM node:20-alpine
 
 WORKDIR /usr/src/app
@@ -14,4 +11,3 @@ COPY . .
 EXPOSE 3000
 
 CMD ["npm", "start"]
->>>>>>> 968163b0d65c6d5465c4ea300af92abded26c73e
