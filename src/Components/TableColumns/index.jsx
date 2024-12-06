@@ -1,5 +1,7 @@
 export const statusDesign = {
-    "PENDING": "processing",
-    "SENT": "success",
-    "CANCELLED": "warning",
-  }
+  "PENDING": "orange",
+  "PACKED": "purple",
+  "SENT": "blue",
+  "DONE": "green",
+  "CANCELLED": "red",
+}

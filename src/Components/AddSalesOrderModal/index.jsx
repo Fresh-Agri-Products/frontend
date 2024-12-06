@@ -178,12 +178,6 @@ const AddSalesOrder = (props) => {
                                         {...restField}
                                         name={[name, 'rate']}
                                         wrapperCol={{ span: 24 }}
-                                        rules={[
-                                            {
-                                                required: true,
-                                                message: 'Missing rate',
-                                            },
-                                        ]}
                                     >
                                         <Input placeholder="Rate" type="number" style={{ marginBottom: 0 }} />
                                     </Form.Item>

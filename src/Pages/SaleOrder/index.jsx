@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { DatePicker, Descriptions, message, Select, Table } from "antd";
-import { handleCatch, screenHeight } from "../../common-utils";
+import { checkAccess, handleCatch, screenHeight } from "../../common-utils";
 import CommonHeader from "../../Components/CommonHeader";
-import { ColFlex, RowFlex, StyledDiv } from "../../Styled/Layout";
+import { ColFlex, RowFlex, StyledDiv, StyledText } from "../../Styled/Layout";
 import { statusDesign } from "../../Components/TableColumns";
-import { fetchAllContacts, fetchAllItems, fetchSalesOrder } from "../../api/sales";
+import { fetchAllContacts, fetchAllItems, fetchSalesOrder, updateSalesOrderStatus } from "../../api/sales";
 import AddSalesOrder from "../../Components/AddSalesOrderModal";
 import { StyledButton } from "../../Styled/Button";
 import { CaretCircleLeft, CaretCircleRight, DownloadSimple, Plus } from "@phosphor-icons/react";
@@ -15,6 +15,14 @@ import dayjs from 'dayjs';
 import { downloadExcel } from "../../Utils/excel";
 import { fetchAllAgents } from "../../api";
 import { useNavigate } from "react-router-dom";
+
+const SaleOrderStatus = [
+  {value: 'PENDING', label: <StyledText ta="left" fs="14px" fw="600" c={statusDesign['PENDING']}>Pending</StyledText>},
+  {value: 'PACKED', label: <StyledText ta="left" fs="14px" fw="600" c={statusDesign['PACKED']}>Packed</StyledText>},
+  {value: 'SENT', label: <StyledText ta="left" fs="14px" fw="600" c={statusDesign['SENT']}>Sent</StyledText>},
+  {value: 'DONE', label: <StyledText ta="left" fs="14px" fw="600" c={statusDesign['DONE']}>Done</StyledText>},
+  {value: 'CANCELLED', label: <StyledText ta="left" fs="14px" fw="600" c={statusDesign['CANCELLED']}>Cancelled</StyledText>}
+];
 
 const SaleOrder = () => {
   const navigate = useNavigate();
@@ -32,22 +40,53 @@ const SaleOrder = () => {
 
   //filters
   const [selectedContact, setSelectedContact] = useState(null);
+  const [selectedStatus, setSelectedStatus] = useState(null);
+
+  const handleStatusChange = async (id, status, newStatus) => {
+    try {
+      // Optimistically update the table
+      const updatedData = filteredSaleOrders.map((item) => 
+        item.id === id ? { ...item, status: newStatus } : item
+      );
+      setFilteredSaleOrders(updatedData);
+  
+      // Send the update to the backend
+      const response = await updateSalesOrderStatus(id, { status: newStatus });
+    } catch (error) {
+      handleCatch(error);
+  
+      // Revert the optimistic update if the API call fails
+      const originalData = filteredSaleOrders.map((item) =>
+        item.id === id ? { ...item, status: status } : item
+      );
+      setFilteredSaleOrders(originalData);
+    }
+  };
 
   const columns = [
     {
       title: 'Name',
       dataIndex: 'contactName',
-      filteredValue: selectedContact && [selectedContact.value],
-      onFilter: (value, record) => record.contactId == value,
-    },
-    {
+      filteredValue: selectedContact && [selectedContact],
+      onFilter: (value, record) => record.contactId == value
+    }
+  ];
+
+  if (checkAccess('EDIT_SALE_ORDER')) {
+    columns.push({
       title: 'Status',
       dataIndex: 'status',
-      render: (data) => <Tag bordered={true} color={statusDesign[data]}>
-        {data.toLowerCase()}
-      </Tag>
-    },
-    {
+      filteredValue: selectedStatus && [selectedStatus],
+      onFilter: (value, record) => record.status == value,
+      render: (data, record) => <Select
+          value={data}
+          options={SaleOrderStatus}
+          style={{ width: 'fit-content'}}
+          popupMatchSelectWidth={false}
+          onClick={(e) => e.stopPropagation()}
+          onChange={(newStatus) => handleStatusChange(record.id, data, newStatus)}
+      />
+    },{
       key: 'action',
       render: (_, rowData) => <PencilSimple size={18} color="rgba(0, 0, 0, 0.58)" weight="fill" onClick={(e) => {
         e.stopPropagation();
@@ -55,8 +94,16 @@ const SaleOrder = () => {
         setEditSaleModalOpen(true);
       }} />,
       width: 1
-    },
-  ];
+    })
+  } else {
+    columns.push({
+      title: 'Status',
+      dataIndex:'status',
+      render: (data) => <Tag color={statusDesign[data]}>
+        {data.toLowerCase()}
+      </Tag>
+    })
+  }
 
   const itemsTableColumn = [
     {
@@ -195,6 +242,11 @@ const SaleOrder = () => {
     )
   }
 
+  const clearFilter = () => {
+    setSelectedContact(null);
+    setSelectedStatus(null);
+  }
+
   useEffect(() => {
     // Toggle date change button visibility based on date comparison
     setIsdateChangeBtnVisible(date[0].isSame(date[1], 'day'));
@@ -211,13 +263,16 @@ const SaleOrder = () => {
 
   return (
     <ColFlex ai="center" minH={false ? `${screenHeight}` : "100vh"} maxW="500px" w="100%" bgc="#fff" style={{ position: "relative" }}>
-      <CommonHeader title="Sales" onBack={()=>navigate(-1)} rightContent={<HeaderContent />} />
+      <CommonHeader title="Sales" onBack={()=>navigate(-1)} rightContent={checkAccess('EDIT_SALE_ORDER') ? <HeaderContent /> : null} />
       <ColFlex m="0" w="100%" p="20px" gap="20px">
-        <RowFlex w="100%" m="0" gap="20px">
-          <CaretCircleLeft size={32} color="#8c8c8c" display={isdateChangeBtnVisible ? "block" : "none"} onClick={()=>updateDate(-1)} />
-          <DatePicker.RangePicker value={date} style={{ alignSelf: "end", width: "100%" }} onChange={onDateChange} format="YYYY/MM/DD" popupClassName="yolup" />
-          <CaretCircleRight size={32} color="#8c8c8c" display={isdateChangeBtnVisible ? "block" : "none"} onClick={()=>updateDate(1)} />
-        </RowFlex>
+        {
+          checkAccess('EDIT_SALE_ORDER') && 
+          <RowFlex w="100%" m="0" gap="20px">
+            <CaretCircleLeft size={32} color="#8c8c8c" display={isdateChangeBtnVisible ? "block" : "none"} onClick={()=>updateDate(-1)} />
+            <DatePicker.RangePicker value={date} style={{ alignSelf: "end", width: "100%" }} onChange={onDateChange} format="YYYY/MM/DD" popupClassName="yolup" />
+            <CaretCircleRight size={32} color="#8c8c8c" display={isdateChangeBtnVisible ? "block" : "none"} onClick={()=>updateDate(1)} />
+          </RowFlex>
+        }
         <RowFlex w="100%" m="0" gap="20px">
           <Select
               showSearch
@@ -229,9 +284,17 @@ const SaleOrder = () => {
               }
               options={allContacts}
               style={{ width: '100%' }}
-              onChange={(e, v) => setSelectedContact(v)}
+              onChange={(e) => setSelectedContact(e)}
           />
-          <StyledButton h="32px" fs="14px" onClick={()=>setSelectedContact(null)}>Reset</StyledButton>
+          <Select
+              value={selectedStatus}
+              options={SaleOrderStatus}
+              placeholder="status"
+              style={{ width: 'fit-content'}}
+              popupMatchSelectWidth={false}
+              onChange={(newStatus) => setSelectedStatus(newStatus)}
+          />
+          <StyledButton h="32px" fs="14px" onClick={clearFilter}>Reset</StyledButton>
         </RowFlex>
         <Table
           style={{ width: '100%' }}

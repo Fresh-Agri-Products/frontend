@@ -18,6 +18,10 @@ axios.interceptors.request.use(
         // if (token) {
         //     config.headers["Authorization"] = token;
         // }
+        const userId = window.localStorage.getItem("userId");
+        if (userId) {
+            config.headers["userId"] = userId;
+        }
 
         return config;
     },
@@ -45,6 +49,27 @@ export const getInitials = (name) => {
         return name.slice(0, 2).toUpperCase();
     }
     return words.slice(0, 2).map(word => word[0].toUpperCase()).join('');
+};
+
+// const getItemFromLocalStorage = (key) => {
+//     const item = window.localStorage.getItem(key);
+//     return item? JSON.parse(item) : null;
+// }
+
+let cachedPermissions = null;
+
+// Utility to get permissions
+const getPermissions = () => {
+  if (cachedPermissions === null) {
+    const permissions = window.localStorage.getItem("permissions");
+    cachedPermissions = permissions ? JSON.parse(permissions) : [];
+  }
+  return cachedPermissions;
+};
+
+export const checkAccess = (name) => {
+  const permissions = getPermissions();
+  return Array.isArray(permissions) && permissions.includes(name);
 };
 
 export const handleCatch = (err) => {

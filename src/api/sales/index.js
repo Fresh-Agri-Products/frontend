@@ -62,3 +62,16 @@ export const updateSaleOrder = (id, payload) => {
         }
     });
 }
+
+export const updateSalesOrderStatus = (id, payload) => {
+    const url = `${API_URL}/saleOrder/update-sale-order-status/${id}`;
+
+    return request({
+        url: url,
+        method: "post",
+        data: payload,
+        headers: {
+            "Content-Type": "application/json"
+        }
+    });
+}

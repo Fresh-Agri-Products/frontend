@@ -1,4 +1,3 @@
-import { useNavigate } from "react-router-dom";
 import { handleCatch, screenHeight } from "../../common-utils";
 import { ColFlex, StyledInput } from "../../Styled/Layout";
 import { Button, Checkbox, Form } from "antd";
@@ -15,6 +14,7 @@ const Login = () => {
             });
             if (res.status === 200) {
                 window.localStorage.setItem("userId", res.data.userId);
+                window.localStorage.setItem("permissions", JSON.stringify(res.data.permissions));
                 window.location.reload();
             }
         } catch (e) {

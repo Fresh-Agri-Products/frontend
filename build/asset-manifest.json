@@ -1,19 +1,19 @@
 {
   "files": {
     "main.css": "/fap-frontend/static/css/main.8b944dbd.css",
-    "main.js": "/fap-frontend/static/js/main.c512138e.js",
-    "static/js/60.e560c507.chunk.js": "/fap-frontend/static/js/60.e560c507.chunk.js",
+    "main.js": "/fap-frontend/static/js/main.064c58a2.js",
+    "static/js/60.3a02f10f.chunk.js": "/fap-frontend/static/js/60.3a02f10f.chunk.js",
     "static/js/453.e03b24a6.chunk.js": "/fap-frontend/static/js/453.e03b24a6.chunk.js",
     "static/js/795.d3080d42.chunk.js": "/fap-frontend/static/js/795.d3080d42.chunk.js",
     "index.html": "/fap-frontend/index.html",
     "main.8b944dbd.css.map": "/fap-frontend/static/css/main.8b944dbd.css.map",
-    "main.c512138e.js.map": "/fap-frontend/static/js/main.c512138e.js.map",
-    "60.e560c507.chunk.js.map": "/fap-frontend/static/js/60.e560c507.chunk.js.map",
+    "main.064c58a2.js.map": "/fap-frontend/static/js/main.064c58a2.js.map",
+    "60.3a02f10f.chunk.js.map": "/fap-frontend/static/js/60.3a02f10f.chunk.js.map",
     "453.e03b24a6.chunk.js.map": "/fap-frontend/static/js/453.e03b24a6.chunk.js.map",
     "795.d3080d42.chunk.js.map": "/fap-frontend/static/js/795.d3080d42.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.8b944dbd.css",
-    "static/js/main.c512138e.js"
+    "static/js/main.064c58a2.js"
   ]
 }
