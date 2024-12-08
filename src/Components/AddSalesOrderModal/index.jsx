@@ -3,12 +3,15 @@ import { Button, DatePicker, Form, Input, message, Modal, Radio, Select, Space }
 import { MinusCircle, PlusCircle } from "@phosphor-icons/react";
 import dayjs from 'dayjs';
 import { addSaleOrder } from "../../api/sales";
-import { ContainerTypes, handleCatch, ItemUnits } from "../../common-utils";
+import { addCommas, ContainerTypes, handleCatch, ItemUnits } from "../../common-utils";
+import { StyledDiv } from "../../Styled/Layout";
 const dateTimestamp = dayjs().valueOf();
 
 const AddSalesOrder = (props) => {
     const { open, onClose, allContacts, allItems, allAgents, fetchOrders } = props;
     const [loading, setLoading] = useState(false);
+    const [totalAmount, setTotalAmount] = useState(0);
+    const [form] = Form.useForm();
 
     const onFinish = async (values) => {
         setLoading(true);
@@ -42,6 +45,16 @@ const AddSalesOrder = (props) => {
         }
     };
 
+    const handleItemTotal = () => {
+        const lineItems = form.getFieldValue('lineItems');
+        let total = 0;
+        for (const item of lineItems) {
+            const { quantity, rate } = item;
+            total += rate && quantity ? rate * quantity : 0;
+        }
+        setTotalAmount(total);
+    }
+
     return (
         <Modal
             title="Add Sales"
@@ -52,7 +65,9 @@ const AddSalesOrder = (props) => {
             styles={{ content: { padding: '10px' } }}
             style={{top: '50px'}}
         >
+            <StyledDiv pos="absolute" top="10px" right="50px" c="#00000088" style={{fontWeight: '600', fontSize: '16px'}}>Total : ₹ {addCommas(totalAmount)}</StyledDiv>
             <Form
+                form={form}
                 labelCol={{ xs: { span: 10 }, sm: { span: 8 } }}
                 wrapperCol={{ xs: { span: 14 }, sm: { span: 16 } }}
                 initialValues={{
@@ -176,13 +191,6 @@ const AddSalesOrder = (props) => {
                                     </Form.Item>
                                     <Form.Item
                                         {...restField}
-                                        name={[name, 'rate']}
-                                        wrapperCol={{ span: 24 }}
-                                    >
-                                        <Input placeholder="Rate" type="number" style={{ marginBottom: 0 }} />
-                                    </Form.Item>
-                                    <Form.Item
-                                        {...restField}
                                         name={[name, 'quantity']}
                                         wrapperCol={{ span: 24 }}
                                         rules={[
@@ -192,7 +200,7 @@ const AddSalesOrder = (props) => {
                                             },
                                         ]}
                                     >
-                                        <Input placeholder="Qtn" type="number" style={{ marginBottom: 0 }} />
+                                        <Input placeholder="Qtn" type="number" style={{ marginBottom: 0 }} onChange={handleItemTotal} />
                                     </Form.Item>
                                     <Form.Item
                                         {...restField}
@@ -204,6 +212,7 @@ const AddSalesOrder = (props) => {
                                                 message: 'Missing unit',
                                             },
                                         ]}
+                                        initialValue={'kg'}
                                     >
                                         <Select
                                             placeholder="units"
@@ -214,7 +223,17 @@ const AddSalesOrder = (props) => {
                                             ))}
                                         </Select>
                                     </Form.Item>
-                                    <MinusCircle size={24} color="#000" style={{ marginBottom: "-7px" }} onClick={() => remove(name)} />
+                                    <Form.Item
+                                        {...restField}
+                                        name={[name, 'rate']}
+                                        wrapperCol={{ span: 24 }}
+                                    >
+                                        <Input placeholder="Rate" prefix="₹" type="number" style={{ marginBottom: 0 }} onChange={handleItemTotal} />
+                                    </Form.Item>
+                                    <MinusCircle size={24} color="#000" style={{ marginBottom: "-7px" }} onClick={() => {
+                                        remove(name);
+                                        handleItemTotal()
+                                    }} />
                                 </Space>
                             ))}
                             <Form.Item

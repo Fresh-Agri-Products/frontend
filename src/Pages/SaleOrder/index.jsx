@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { DatePicker, Descriptions, message, Select, Table } from "antd";
-import { checkAccess, handleCatch, screenHeight } from "../../common-utils";
+import { addCommas, checkAccess, handleCatch, screenHeight } from "../../common-utils";
 import CommonHeader from "../../Components/CommonHeader";
 import { ColFlex, RowFlex, StyledDiv, StyledText } from "../../Styled/Layout";
 import { statusDesign } from "../../Components/TableColumns";
@@ -273,17 +273,18 @@ const SaleOrder = () => {
             <CaretCircleRight size={32} color="#8c8c8c" display={isdateChangeBtnVisible ? "block" : "none"} onClick={()=>updateDate(1)} />
           </RowFlex>
         }
-        <RowFlex w="100%" m="0" gap="20px">
+        <RowFlex w="100%" m="0" gap="10px">
           <Select
               showSearch
               value={selectedContact}
               placeholder="customers"
               optionFilterProp="label"
+              popupMatchSelectWidth={false}
               filterSort={(optionA, optionB) =>
                   (optionA?.label ?? '').toLowerCase().localeCompare((optionB?.label ?? '').toLowerCase())
               }
               options={allContacts}
-              style={{ width: '100%' }}
+              style={{ minWidth: '40%', width: '100%' }}
               onChange={(e) => setSelectedContact(e)}
           />
           <Select
@@ -314,7 +315,9 @@ const SaleOrder = () => {
                 title=""
                 size="small"
                 style={{marginBottom: "10px"}}
-                column={{ xs: 1 }}
+                layout="vertical"
+                bordered
+                column={{ xs: 2 }}
                 items={[
                   {
                     key: '1',
@@ -324,6 +327,13 @@ const SaleOrder = () => {
                     key: '2',
                     label: 'Containers',
                     children: record.containers?.map((e)=><>{e.type} : {e.quantity}<br/></>),
+                  },
+                  {
+                    key: '3',
+                    label: 'Total',
+                    children: `₹ ${addCommas(record.items.reduce((curr, acc) => {
+                      return curr + (acc.itemTotal || 0);
+                    }, 0))}`,
                   }
                 ]}
               />
