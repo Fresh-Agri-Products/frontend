@@ -91,6 +91,7 @@ export const RowFlex = styled.div`
   box-shadow: ${(props) => props.bs || ""};
   border: ${(props) => props.b || ""};
   border-radius: ${(props) => props.br || ""};
+  z-index: ${(props) => props.zi || ""};
 `;
 
 export const ColFlex = styled.div`

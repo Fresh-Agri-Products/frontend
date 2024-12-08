@@ -9,11 +9,11 @@ const CommonHeader = (props) => {
           h="56px"
           m="0"
           p="10px 20px"
-          bg="#EDF6FF"
+          bg="#6a8099"
     >
       <RowFlex m="auto 0" gap="10px">
-        <CaretLeft size={24} color="#000" onClick={onBack} />
-        <StyledText fs="18px" lh="24px" fw="600" ff="Inter" c="#000" mb="auto">
+        <CaretLeft size={24} color="#fff" onClick={onBack} />
+        <StyledText fs="18px" lh="24px" fw="600" ff="Inter" c="#fff" mb="auto">
             {title}
         </StyledText>
       </RowFlex>

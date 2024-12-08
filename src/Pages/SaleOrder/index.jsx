@@ -143,7 +143,7 @@ const SaleOrder = () => {
           >
           Add
         </StyledButton>
-        <DownloadSimple size={24} color="#000" style={{ alignSelf: "end", margin: "auto" }} onClick={handleDownload} />
+        <DownloadSimple size={24} color="#fff" style={{ alignSelf: "end", margin: "auto" }} onClick={handleDownload} />
       </RowFlex>
     )
   }

@@ -24,7 +24,7 @@ const Login = () => {
 
     return (
         <ColFlex ai="center" minH={false ? `${screenHeight}` : "100vh"} maxW="500px" w="100%" bgc="#fff" style={{ position: "relative" }}>
-            <HeaderComponent />
+            <HeaderComponent isLogedIn={false} />
             <Form
                 name="login"
                 initialValues={{
@@ -46,7 +46,6 @@ const Login = () => {
                     ]}
                 >
                     <StyledInput prefix={<User size={22} color="#000" />} placeholder="Username" />
-                    {/* <Input prefix={<User size={22} color="#000" />} placeholder="Username" /> */}
                 </Form.Item>
                 <Form.Item
                     name="password"
@@ -58,16 +57,15 @@ const Login = () => {
                     ]}
                 >
                     <StyledInput prefix={<Lock size={22} color="#000" />} type="password" placeholder="Password" />
-                    {/* <Input prefix={<Lock size={22} color="#000" />} type="password" placeholder="Password" /> */}
                 </Form.Item>
-                <Form.Item>
+                {/* <Form.Item>
                     <Form.Item name="remember" valuePropName="checked" noStyle>
-                        <Checkbox>Remember me</Checkbox>
+                        <Checkbox style={{backgroundColor: "green"}}>Remember me</Checkbox>
                     </Form.Item>
-                </Form.Item>
+                </Form.Item> */}
 
                 <Form.Item>
-                    <Button block type="primary" htmlType="submit" style={{marginBottom: "10px"}}>
+                    <Button block type="primary" htmlType="submit" style={{marginBottom: "10px", backgroundColor: "green"}}>
                         Log in
                     </Button>
                     or contact Abhishek for registration
