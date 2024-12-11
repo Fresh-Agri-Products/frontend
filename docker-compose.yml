@@ -6,4 +6,7 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "3000:80"
+      - "443:443"
+      - "80:80"
+    volumes:
+      - /etc/letsencrypt:/etc/letsencrypt:ro
