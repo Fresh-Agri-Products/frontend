@@ -41,7 +41,7 @@ const Home = () => {
             gridTemplateColumns: "repeat(auto-fill, minmax(140px, 1fr))",
             backgroundSize: "cover"
           }}>
-            <Type1Card value={`₹${addCommas(totalSales)}`} title="Total Sales" />
+            <Type1Card value={`₹${totalSales ? addCommas(totalSales.toFixed(2)) : 0}`} title="Total Sales" />
             <Type1Card value={`₹${addCommas(0)}`} title="Total Purchase" />
             <Type1Card value={addCommas(totalSalesOrders)} title="Total SO" />
             <Type1Card value={addCommas(0)} title="Total PO" />
