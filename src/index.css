@@ -5,6 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
 
 code {
@@ -52,8 +53,8 @@ code {
   left: 0;
   right: 0;
   bottom: 0;
-  backdrop-filter: blur(.5px);
-  background: rgba(255, 255, 255, 0.3); /* Optional: To control overlay color */
+  backdrop-filter: blur(.2px);
+  background: rgba(255, 255, 255, 0.1);
 }
 
 .ant-modal-close {

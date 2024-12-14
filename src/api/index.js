@@ -11,3 +11,15 @@ export const fetchAllAgents = () => {
         }
     });
 }
+
+export const fetchDashboardData = () => {
+    const url = `${API_URL}/analytics/get-dashboard-data`;
+
+    return request({
+        url: url,
+        method: "get",
+        headers: {
+            "Content-Type": "application/json"
+        }
+    });
+}
