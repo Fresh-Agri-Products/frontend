@@ -112,16 +112,16 @@ const SaleOrder = () => {
       render: (data) => <>{allItems.find((e) => e.value == data).label}</>
     },
     {
-      title: 'rate',
-      dataIndex: 'rate',
-    },
-    {
       title: 'Qtn',
       dataIndex: 'quantity',
     },
     {
       title: 'unit',
       dataIndex: 'unit',
+    },
+    {
+      title: 'rate',
+      dataIndex: 'rate',
     }
   ];
 
@@ -130,7 +130,7 @@ const SaleOrder = () => {
       message.error("No Sale Order Found!!");
       return;
     }
-    downloadExcel(filteredSaleOrders, date[0].format("YYYY/MM/DD"), date[1].format("YYYY/MM/DD"))
+    downloadExcel(filteredSaleOrders, date[0].format("DD/MM/YYYY"), date[1].format("DD/MM/YYYY"))
   }
 
   const HeaderContent = () => {
@@ -218,7 +218,7 @@ const SaleOrder = () => {
   }
 
   const onDateChange = (_, dates) => {
-    const dateFunc = dates.map(date => dayjs(date))
+    const dateFunc = dates.map(date => dayjs(date, "DD/MM/YYYY"))
     setDate(dateFunc);
   }
   const updateDate = (days) => {
@@ -269,7 +269,7 @@ const SaleOrder = () => {
           checkAccess('EDIT_SALE_ORDER') && 
           <RowFlex w="100%" m="0" gap="20px">
             <CaretCircleLeft size={32} color="#8c8c8c" display={isdateChangeBtnVisible ? "block" : "none"} onClick={()=>updateDate(-1)} />
-            <DatePicker.RangePicker value={date} style={{ alignSelf: "end", width: "100%" }} onChange={onDateChange} format="YYYY/MM/DD" popupClassName="yolup" />
+            <DatePicker.RangePicker value={date} style={{ alignSelf: "end", width: "100%" }} onChange={onDateChange} format="DD/MM/YYYY" popupClassName="yolup" />
             <CaretCircleRight size={32} color="#8c8c8c" display={isdateChangeBtnVisible ? "block" : "none"} onClick={()=>updateDate(1)} />
           </RowFlex>
         }
@@ -311,6 +311,7 @@ const SaleOrder = () => {
             expandIconColumnIndex: -1,
             expandRowByClick: true,
             expandedRowRender: (record) => <StyledDiv id="1234" w="100%">
+              <ItemTable itemData={record.items} />
               <Descriptions
                 title=""
                 size="small"
@@ -337,7 +338,6 @@ const SaleOrder = () => {
                   }
                 ]}
               />
-              <ItemTable itemData={record.items} />
             </StyledDiv>
           }}
           rowKey={(_, i) => i}

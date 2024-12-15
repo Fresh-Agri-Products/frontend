@@ -62,8 +62,8 @@ const EditSalesOrder = (props) => {
             "id": lineItems.length,
             "itemId": 1,
             "itemTotal": 0,
-            "quantity": 0,
-            "rate": 0,
+            "quantity": "",
+            "rate": "",
             "unit": "kg",
             "itemDetails": {
                 "name": "broccoli"
@@ -130,16 +130,16 @@ const EditSalesOrder = (props) => {
             render: (data) => <>{itemNameToIdMap.get(data)}</>
         },
         {
-            title: 'rate',
-            dataIndex: 'rate',
-        },
-        {
             title: 'Qtn',
             dataIndex: 'quantity',
         },
         {
             title: 'unit',
             dataIndex: 'unit',
+        },
+        {
+            title: 'rate',
+            dataIndex: 'rate',
         }
     ];
     const containerTableColumn = [
@@ -222,7 +222,7 @@ const EditSalesOrder = (props) => {
             width="fit-content"
         >
             <ColFlex gap="15px">
-                <DatePicker value={date} style={{ alignSelf: "end", marginTop: "10px" }} onChange={(e, v) => setDate(dayjs(v))} />
+                <DatePicker value={date} style={{ alignSelf: "end", marginTop: "10px" }} format="DD/MM/YYYY" onChange={(e, v) => setDate(dayjs(v, "DD/MM/YYYY"))} />
                 <Select
                     showSearch
                     value={contactId}

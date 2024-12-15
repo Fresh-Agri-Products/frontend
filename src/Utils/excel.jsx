@@ -4,7 +4,7 @@ const XLSX = require("xlsx");
 
 export const downloadExcel = (salesData, startDate, endDate) => {
     // Helper to format date
-    const formatDate = (dateString) => dayjs(dateString).format("YYYY-MMM-DD");
+    const formatDate = (dateString) => dayjs(dateString).format("DD-MM-YYYY");
 
     // Group sales data by date
     const salesByDate = salesData.reduce((acc, order) => {

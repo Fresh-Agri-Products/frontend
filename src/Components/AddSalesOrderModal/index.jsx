@@ -37,7 +37,7 @@ const AddSalesOrder = (props) => {
             await addSaleOrder(payload);
             message.success('sale order added successfully');
             fetchOrders();
-            onClose();
+            closePopup();
         } catch (err) {
             handleCatch(err);
         } finally {
@@ -55,13 +55,18 @@ const AddSalesOrder = (props) => {
         setTotalAmount(total);
     }
 
+    const closePopup = () => {
+        form.resetFields();
+        onClose();
+    }
+
     return (
         <Modal
             title="Add Sales"
             footer={null}
             loading={loading}
             open={open}
-            onCancel={onClose}
+            onCancel={closePopup}
             styles={{ content: { padding: '10px' } }}
             style={{top: '50px'}}
         >
@@ -96,7 +101,7 @@ const AddSalesOrder = (props) => {
                     })}
                     normalize={(value) => value && `${dayjs(value).valueOf()}`}
                 >
-                    <DatePicker />
+                    <DatePicker format="DD/MM/YYYY" />
                 </Form.Item>
                 <Form.Item name="contactId" wrapperCol={{ span: 24 }} rules={[{ required: true, message: 'Please select a customer!' }]}>
                     <Select
@@ -185,7 +190,7 @@ const AddSalesOrder = (props) => {
                                                 (optionA?.label ?? '').toLowerCase().localeCompare((optionB?.label ?? '').toLowerCase())
                                             }
                                             options={allItems}
-                                            style={{ width: '100%' }}
+                                            style={{ width: '100%', maxWidth: '80px' }}
                                         >
                                         </Select>
                                     </Form.Item>
