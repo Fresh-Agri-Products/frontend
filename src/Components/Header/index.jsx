@@ -1,7 +1,7 @@
-import { Avatar } from "antd";
-import { RowFlex, StyledText } from "../../Styled/Layout";
+import { RowFlex, StyledImage, StyledText } from "../../Styled/Layout";
 import { SignOut } from "@phosphor-icons/react";
 import { clearLocalStorage } from "../../common-utils";
+import Logo from "../../assets/Logo.svg";
 
 const HeaderComponent = (props) => {
   return (
@@ -16,7 +16,7 @@ const HeaderComponent = (props) => {
         ai="center"
         m="0 0 0 20px"
       >
-        <Avatar size={24} style={{ backgroundColor: '#87d068' }}>F</Avatar>
+        <StyledImage src={Logo} w="26px" h="26px"/>
         <StyledText fs="18px" lh="24px" fw="600" ff="Inter" c="#000">
           Fresh Agri Product
         </StyledText>

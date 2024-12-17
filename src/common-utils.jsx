@@ -72,6 +72,13 @@ export const checkAccess = (name) => {
   return Array.isArray(permissions) && permissions.includes(name);
 };
 
+export const checkAccessAndRedirect = (name) => {
+    const isAllowed = checkAccess(name);
+    if (!isAllowed) {
+        window.location.href = "/";
+    }
+};
+
 export const clearLocalStorage = () => {
     window.localStorage.clear();
 }
@@ -97,6 +104,12 @@ export const addCommas = (input) => {
 
     return res;
 };
+
+export function isSameDay(date1, date2) {
+    return (
+        date1.toISOString().slice(0, 10) === date2.toISOString().slice(0, 10)
+    );
+}
 
 export const handleCatch = (err) => {
     if (err.response && err.response.data === "Access denied. No token provided") return;

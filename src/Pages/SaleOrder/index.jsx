@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { DatePicker, Descriptions, message, Select, Table } from "antd";
-import { addCommas, checkAccess, handleCatch, screenHeight } from "../../common-utils";
+import { addCommas, checkAccess, handleCatch, isSameDay, screenHeight } from "../../common-utils";
 import CommonHeader from "../../Components/CommonHeader";
 import { ColFlex, RowFlex, StyledDiv, StyledText } from "../../Styled/Layout";
 import { statusDesign } from "../../Components/TableColumns";
@@ -41,6 +41,10 @@ const SaleOrder = () => {
   //filters
   const [selectedContact, setSelectedContact] = useState(null);
   const [selectedStatus, setSelectedStatus] = useState(null);
+
+  //access
+  const role = window.localStorage.getItem('role');
+  const canEditPreviousOrder = role && ["admin", "accountant"].includes(role);
 
   const handleStatusChange = async (id, status, newStatus) => {
     try {
@@ -90,6 +94,10 @@ const SaleOrder = () => {
       key: 'action',
       render: (_, rowData) => <PencilSimple size={18} color="rgba(0, 0, 0, 0.58)" weight="fill" onClick={(e) => {
         e.stopPropagation();
+        if(!isSameDay(new Date(rowData.date), new Date()) && !canEditPreviousOrder) {
+          message.error("You don't have permission");
+          return;
+        }
         setSelectedSaleOrder(rowData);
         setEditSaleModalOpen(true);
       }} />,

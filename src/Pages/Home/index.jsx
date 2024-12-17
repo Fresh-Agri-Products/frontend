@@ -70,11 +70,13 @@ const Home = () => {
               Purchase
             </StyledText>
           </StyledDiv> */}
-          <StyledDiv p="30px 0" b="1px solid #00000010" br="15px" bgc="#fff" onClick={() => navigate("/contacts")} style={{borderTop: "3px solid cadetblue"}}>
-            <StyledText fs="15px" fw="600" ta="center">
-              Contacts
-            </StyledText>
-          </StyledDiv>
+          {
+            checkAccess('SHOW_CONTACT') && <StyledDiv p="30px 0" b="1px solid #00000010" br="15px" bgc="#fff" onClick={() => navigate("/contacts")} style={{borderTop: "3px solid cadetblue"}}>
+              <StyledText fs="15px" fw="600" ta="center">
+                Contacts
+              </StyledText>
+            </StyledDiv>
+          }
         </StyledDiv>
       </ColFlex>
     </ColFlex>

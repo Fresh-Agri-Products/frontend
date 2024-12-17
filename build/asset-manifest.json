@@ -1,25 +1,26 @@
 {
   "files": {
     "main.css": "/static/css/main.49e40f3e.css",
-    "main.js": "/static/js/main.54a28eff.js",
-    "static/js/647.a26f1123.chunk.js": "/static/js/647.a26f1123.chunk.js",
-    "static/js/200.ae375a01.chunk.js": "/static/js/200.ae375a01.chunk.js",
+    "main.js": "/static/js/main.de9abce1.js",
+    "static/js/647.90e0dce3.chunk.js": "/static/js/647.90e0dce3.chunk.js",
+    "static/js/200.9ac6489c.chunk.js": "/static/js/200.9ac6489c.chunk.js",
     "static/js/453.e03b24a6.chunk.js": "/static/js/453.e03b24a6.chunk.js",
-    "static/js/574.3e5c059b.chunk.js": "/static/js/574.3e5c059b.chunk.js",
+    "static/js/574.d790d537.chunk.js": "/static/js/574.d790d537.chunk.js",
     "static/js/783.fc075212.chunk.js": "/static/js/783.fc075212.chunk.js",
     "static/media/HomeDesign1.svg": "/static/media/HomeDesign1.b24490fabdbe2b3a4cae011be754a508.svg",
     "static/media/HomeDesign2.svg": "/static/media/HomeDesign2.d7c80614787bec6489e2a1d420ac0293.svg",
+    "static/media/Logo.svg": "/static/media/Logo.872b514a73c1be598a7b611e5f0f511e.svg",
     "index.html": "/index.html",
     "main.49e40f3e.css.map": "/static/css/main.49e40f3e.css.map",
-    "main.54a28eff.js.map": "/static/js/main.54a28eff.js.map",
-    "647.a26f1123.chunk.js.map": "/static/js/647.a26f1123.chunk.js.map",
-    "200.ae375a01.chunk.js.map": "/static/js/200.ae375a01.chunk.js.map",
+    "main.de9abce1.js.map": "/static/js/main.de9abce1.js.map",
+    "647.90e0dce3.chunk.js.map": "/static/js/647.90e0dce3.chunk.js.map",
+    "200.9ac6489c.chunk.js.map": "/static/js/200.9ac6489c.chunk.js.map",
     "453.e03b24a6.chunk.js.map": "/static/js/453.e03b24a6.chunk.js.map",
-    "574.3e5c059b.chunk.js.map": "/static/js/574.3e5c059b.chunk.js.map",
+    "574.d790d537.chunk.js.map": "/static/js/574.d790d537.chunk.js.map",
     "783.fc075212.chunk.js.map": "/static/js/783.fc075212.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.49e40f3e.css",
-    "static/js/main.54a28eff.js"
+    "static/js/main.de9abce1.js"
   ]
 }

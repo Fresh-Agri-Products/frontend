@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Descriptions, Input, Table } from "antd";
-import { addCommas, checkAccess, handleCatch, screenHeight } from "../../common-utils";
+import { addCommas, checkAccess, checkAccessAndRedirect, handleCatch, screenHeight } from "../../common-utils";
 import CommonHeader from "../../Components/CommonHeader";
 import { ColFlex, RowFlex, StyledDiv, StyledText } from "../../Styled/Layout";
 import { statusDesign } from "../../Components/TableColumns";
@@ -76,6 +76,7 @@ const Contact = () => {
   }
 
   useEffect(() => {
+    checkAccessAndRedirect("SHOW_CONTACT");
     getAllContacts();
   }, []);
 

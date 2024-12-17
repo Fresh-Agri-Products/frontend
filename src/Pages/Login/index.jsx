@@ -15,6 +15,7 @@ const Login = () => {
             if (res.status === 200) {
                 window.localStorage.setItem("userId", res.data.userId);
                 window.localStorage.setItem("permissions", JSON.stringify(res.data.permissions));
+                window.localStorage.setItem("role", res.data.role);
                 window.location.reload();
             }
         } catch (e) {
