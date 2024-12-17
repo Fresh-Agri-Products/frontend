@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { addCommas, checkAccess, handleCatch, screenHeight } from "../../common-utils";
 import HeaderComponent from "../../Components/Header";
-import { ColFlex, StyledDiv } from "../../Styled/Layout";
+import { ColFlex, StyledDiv, StyledText } from "../../Styled/Layout";
 import HomeDesign1 from "../../assets/HomeDesign1.svg";
 import HomeDesign2 from "../../assets/HomeDesign2.svg";
 import Type1Card from "../../Components/Card/Type1Card";
@@ -55,8 +55,26 @@ const Home = () => {
           <Type1Card value={addCommas(dailySalesOrders)} title="Daily Sales" />
           <Type1Card value={addCommas(0)} title="Daily Purchase" />
         </StyledDiv>
-        <StyledDiv p="30px" b="1px solid #00000010" br="8px" bgc="#fff" onClick={() => navigate("/sale")}>
-            Sale
+        <StyledDiv w="100%" br="8px" bgc="#00000005" p="20px" gap="16px" mb="20px" style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fill, minmax(80px, 1fr))",
+          backgroundSize: "cover"
+        }}>
+          <StyledDiv p="30px 0" b="1px solid #00000010" br="15px" bgc="#fff" onClick={() => navigate("/sale")} style={{borderTop: "3px solid mediumseagreen"}}>
+            <StyledText fs="15px" fw="600" ta="center">
+              Sale
+            </StyledText>
+          </StyledDiv>
+          {/* <StyledDiv p="30px 0" b="1px solid #00000010" br="15px" bgc="#fff" onClick={() => navigate("/sale")} style={{borderTop: "3px solid orange"}}>
+            <StyledText fs="14px" fw="600" ta="center">
+              Purchase
+            </StyledText>
+          </StyledDiv> */}
+          <StyledDiv p="30px 0" b="1px solid #00000010" br="15px" bgc="#fff" onClick={() => navigate("/contacts")} style={{borderTop: "3px solid cadetblue"}}>
+            <StyledText fs="15px" fw="600" ta="center">
+              Contacts
+            </StyledText>
+          </StyledDiv>
         </StyledDiv>
       </ColFlex>
     </ColFlex>

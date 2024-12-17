@@ -7,7 +7,7 @@ import { statusDesign } from "../../Components/TableColumns";
 import { fetchAllContacts, fetchAllItems, fetchSalesOrder, updateSalesOrderStatus } from "../../api/sales";
 import AddSalesOrder from "../../Components/AddSalesOrderModal";
 import { StyledButton } from "../../Styled/Button";
-import { CaretCircleLeft, CaretCircleRight, DownloadSimple, Plus } from "@phosphor-icons/react";
+import { ArrowsClockwise, CaretCircleLeft, CaretCircleRight, DownloadSimple, Plus } from "@phosphor-icons/react";
 import EditSalesOrder from "../../Components/EditSalesOrderModal";
 import { PencilSimple } from "@phosphor-icons/react";
 import { Tag } from "antd";
@@ -136,13 +136,7 @@ const SaleOrder = () => {
   const HeaderContent = () => {
     return (
       <RowFlex m="0" gap="20px">
-        <StyledButton
-          h="36px"
-          onClick={() => setAddSaleModalOpen(true)}
-          icon={<Plus size={18} color="#000" />}
-          >
-          Add
-        </StyledButton>
+        <StyledButton h="32px" shape="circle" icon={<Plus size={18} color="#6a8099" weight="bold" />} onClick={() => setAddSaleModalOpen(true)} style={{margin: "auto"}} />
         <DownloadSimple size={24} color="#fff" style={{ alignSelf: "end", margin: "auto" }} onClick={handleDownload} />
       </RowFlex>
     )
@@ -263,7 +257,7 @@ const SaleOrder = () => {
 
   return (
     <ColFlex ai="center" minH={false ? `${screenHeight}` : "100vh"} maxW="500px" w="100%" bgc="#fff" style={{ position: "relative" }}>
-      <CommonHeader title="Sales" onBack={()=>navigate(-1)} rightContent={checkAccess('EDIT_SALE_ORDER') ? <HeaderContent /> : null} />
+      <CommonHeader title="Sales" bgc="seagreen" onBack={()=>navigate(-1)} rightContent={checkAccess('EDIT_SALE_ORDER') ? <HeaderContent /> : null} />
       <ColFlex m="0" w="100%" p="20px" gap="20px">
         {
           checkAccess('EDIT_SALE_ORDER') && 
@@ -273,7 +267,7 @@ const SaleOrder = () => {
             <CaretCircleRight size={32} color="#8c8c8c" display={isdateChangeBtnVisible ? "block" : "none"} onClick={()=>updateDate(1)} />
           </RowFlex>
         }
-        <RowFlex w="100%" m="0" gap="10px">
+        <RowFlex w="100%" m="0" gap="20px">
           <Select
               showSearch
               value={selectedContact}
@@ -295,7 +289,7 @@ const SaleOrder = () => {
               popupMatchSelectWidth={false}
               onChange={(newStatus) => setSelectedStatus(newStatus)}
           />
-          <StyledButton h="32px" fs="14px" onClick={clearFilter}>Reset</StyledButton>
+          <ArrowsClockwise size={32} weight="bold" color="#00000070" onClick={clearFilter} />
         </RowFlex>
         <Table
           style={{ width: '100%' }}
