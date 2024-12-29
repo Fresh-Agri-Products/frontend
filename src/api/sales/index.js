@@ -75,3 +75,16 @@ export const updateSalesOrderStatus = (id, payload) => {
         }
     });
 }
+
+export const getInvoicePdf = (payload) => {
+    const url = `${API_URL}/invoice/get-invoice-pdf`;
+
+    return request({
+        url: url,
+        method: "post",
+        data: payload,
+        headers: {
+            "Content-Type": "application/json"
+        }
+    });
+}

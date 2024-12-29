@@ -4,7 +4,7 @@ import { addCommas, checkAccess, handleCatch, isSameDay, screenHeight } from "..
 import CommonHeader from "../../Components/CommonHeader";
 import { ColFlex, RowFlex, StyledDiv, StyledText } from "../../Styled/Layout";
 import { statusDesign } from "../../Components/TableColumns";
-import { fetchAllContacts, fetchAllItems, fetchSalesOrder, updateSalesOrderStatus } from "../../api/sales";
+import { fetchAllContacts, fetchAllItems, fetchSalesOrder, getInvoicePdf, updateSalesOrderStatus } from "../../api/sales";
 import AddSalesOrder from "../../Components/AddSalesOrderModal";
 import { StyledButton } from "../../Styled/Button";
 import { ArrowsClockwise, CaretCircleLeft, CaretCircleRight, DownloadSimple, Plus } from "@phosphor-icons/react";
@@ -249,6 +249,20 @@ const SaleOrder = () => {
     setSelectedStatus(null);
   }
 
+  const downloadInvoice = async (saleOrderId) => {
+    try {
+      const response = await getInvoicePdf({saleOrderId});
+      if(response.status === 200) {
+        const link = document.createElement("a");
+        link.href = response.data.signedUrl;
+        link.download = "invoice.pdf";
+        link.click();
+      }
+    } catch (err) {
+      handleCatch(err);
+    }
+  }
+
   useEffect(() => {
     // Toggle date change button visibility based on date comparison
     setIsdateChangeBtnVisible(date[0].isSame(date[1], 'day'));
@@ -337,6 +351,11 @@ const SaleOrder = () => {
                     children: `₹ ${addCommas(record.items.reduce((curr, acc) => {
                       return curr + (acc.itemTotal || 0);
                     }, 0))}`,
+                  },
+                  {
+                    key: '4',
+                    label: 'Invoice Pdf',
+                    children: <span style={{color: 'blue', textDecoration: 'underline'}} onClick={()=>downloadInvoice(record.id)}>Download</span>,
                   }
                 ]}
               />

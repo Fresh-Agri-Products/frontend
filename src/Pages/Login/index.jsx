@@ -46,7 +46,7 @@ const Login = () => {
                         },
                     ]}
                 >
-                    <StyledInput prefix={<User size={22} color="#000" />} placeholder="Username" />
+                    <StyledInput prefix={<User size={22} color="#000" />} placeholder="Username" style={{fontSize: "18px"}} />
                 </Form.Item>
                 <Form.Item
                     name="password"
@@ -57,16 +57,10 @@ const Login = () => {
                         },
                     ]}
                 >
-                    <StyledInput prefix={<Lock size={22} color="#000" />} type="password" placeholder="Password" />
+                    <StyledInput.Password prefix={<Lock size={22} color="#000" />} type="password" placeholder="Password" style={{height: "46px", fontSize: "18px"}} />
                 </Form.Item>
-                {/* <Form.Item>
-                    <Form.Item name="remember" valuePropName="checked" noStyle>
-                        <Checkbox style={{backgroundColor: "green"}}>Remember me</Checkbox>
-                    </Form.Item>
-                </Form.Item> */}
-
                 <Form.Item>
-                    <Button block type="primary" htmlType="submit" style={{marginBottom: "10px", backgroundColor: "green"}}>
+                    <Button block type="primary" htmlType="submit" style={{height: "46px", marginBottom: "10px", backgroundColor: "green", fontSize: "16px"}}>
                         Log in
                     </Button>
                     or contact Abhishek for registration
