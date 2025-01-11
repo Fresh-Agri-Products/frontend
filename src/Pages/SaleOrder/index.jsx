@@ -352,11 +352,11 @@ const SaleOrder = () => {
                       return curr + (acc.itemTotal || 0);
                     }, 0))}`,
                   },
-                  {
-                    key: '4',
-                    label: 'Invoice Pdf',
-                    children: <span style={{color: 'blue', textDecoration: 'underline'}} onClick={()=>downloadInvoice(record.id)}>Download</span>,
-                  }
+                  // {
+                  //   key: '4',
+                  //   label: 'Invoice Pdf',
+                  //   children: <span style={{color: 'blue', textDecoration: 'underline'}} onClick={()=>downloadInvoice(record.id)}>Download</span>,
+                  // }
                 ]}
               />
             </StyledDiv>
